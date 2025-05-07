@@ -1,4 +1,2 @@
-Name,Liquidity Growth (%),Passed Criteria
-TokenAlpha,45,TRUE
-TokenBravo,38,TRUE
-TokenDelta,40,TRUE
+Name,Score,Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
+DOG / SOL,2,True,True,False,True,True

@@ -2,117 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🔥 Live Memecoin Scanner</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      padding: 20px;
-      background-color: #fff;
-      color: #000;
-      transition: all 0.3s;
+    body.dark-mode {
+      background-color: #1e1e1e;
+      color: #f1f1f1;
     }
-    body.dark {
-      background-color: #121212;
-      color: #f0f0f0;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 1rem;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.75rem;
-      text-align: left;
-    }
-    th {
-      background: #f0f0f0;
-    }
-    .dark th {
-      background: #222;
-    }
-    .check {
-      color: green;
-      font-weight: bold;
-    }
-    .cross {
-      color: crimson;
-      font-weight: bold;
-    }
-    .footer {
-      margin-top: 3rem;
+    .table td, .table th {
+      vertical-align: middle;
       text-align: center;
-      font-size: 0.9rem;
-      color: gray;
     }
-    .definitions {
-      margin-top: 2rem;
+    .criteria-desc {
+      font-size: 0.95rem;
     }
-    .definitions ul {
-      padding-left: 1.5rem;
-    }
-    .toggle-button {
-      background: gold;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      float: right;
+    .copyright {
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 30px;
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
-  <button class="toggle-button" onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
-  <h2>🔥 Live Memecoin Scanner (Top 5 on Solana)</h2>
-  <p>Auto-refreshes every 60 seconds • Showing top 5 tokens.</p>
-  <div id="table-container"></div>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>🔥 Live Memecoin Scanner (Top 5 on Solana)</h4>
+      <button class="btn btn-warning btn-sm" onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+    </div>
 
-  <div class="definitions">
-    <h3>🟦 Criteria Definitions</h3>
-    <ul>
+    <p>Auto-refreshes every 60 seconds • Showing coins with Score ≥ 2.</p>
+
+    <div id="token-table" class="table-responsive mb-4"></div>
+
+    <h5>🟦 Criteria Definitions</h5>
+    <ul class="criteria-desc">
       <li><strong>Criteria 1 – Volume Spike:</strong> Significant 5-min trading volume increase compared to prior periods (indicates sudden interest).</li>
       <li><strong>Criteria 2 – Liquidity Growth:</strong> Liquidity pool size grew by at least 10% in the past hour (suggests new capital is entering).</li>
       <li><strong>Criteria 3 – Whale Buys:</strong> Presence of large wallet purchases or high concentration of buys (early whale accumulation).</li>
       <li><strong>Criteria 4 – Price Surge:</strong> Token price increased rapidly within the last 5-minute candle (potential breakout).</li>
       <li><strong>Criteria 5 – Token Age:</strong> Token was created less than 48 hours ago (maximizing early volatility potential).</li>
     </ul>
+
+    <div class="copyright">© Copyright by Gunawan Panjaitan</div>
   </div>
 
-  <div class="footer">© Copyright by Gunawan Panjaitan</div>
-
   <script>
-    async function fetchData() {
-      const res = await fetch('https://raw.githubusercontent.com/Gun1-dot/MemeCoin_GunTracker/main/data/top_5_tokens.csv');
-      const data = await res.text();
-      const rows = data.trim().split('\n').map(r => r.split(','));
-
-      const headers = rows[0];
-      const records = rows.slice(1);
-      let html = '<table><thead><tr>';
-      headers.forEach(h => html += `<th>${h}</th>`);
-      html += '</tr></thead><tbody>';
-      records.forEach(row => {
-        html += '<tr>';
-        row.forEach((val, idx) => {
-          if (headers[idx].includes('Criteria')) {
-            html += `<td class="${val === 'true' ? 'check' : 'cross'}">${val === 'true' ? '✔' : '✖'}</td>`;
-          } else {
-            html += `<td>${val}</td>`;
-          }
-        });
-        html += '</tr>';
-      });
-      html += '</tbody></table>';
-      document.getElementById('table-container').innerHTML = html;
-    }
-
     function toggleDarkMode() {
-      document.body.classList.toggle('dark');
+      document.body.classList.toggle("dark-mode");
     }
 
-    fetchData();
-    setInterval(fetchData, 60000);
+    function loadTable() {
+      const csvUrl = "https://raw.githubusercontent.com/Gun1-dot/MemeCoin_GunTracker/main/data/top_5_tokens.csv";
+      Papa.parse(csvUrl, {
+        download: true,
+        header: true,
+        complete: function(results) {
+          const data = results.data.filter(row => parseInt(row["Score"]) >= 2);
+          if (data.length === 0) {
+            document.getElementById("token-table").innerHTML = "<p>No tokens meet the criteria currently.</p>";
+            return;
+          }
+
+          let html = '<table class="table table-bordered table-striped table-hover">';
+          html += "<thead><tr>";
+          html += "<th>Name</th><th>Score</th>";
+          for (let i = 1; i <= 5; i++) html += `<th>Criteria ${i}</th>`;
+          html += "</tr></thead><tbody>";
+
+          data.forEach(row => {
+            html += "<tr>";
+            html += `<td>${row["Name"]}</td>`;
+            html += `<td>${row["Score"]}</td>`;
+            for (let i = 1; i <= 5; i++) {
+              const val = row[`Criteria ${i}`].toLowerCase();
+              html += `<td>${val === "true" ? "✅" : "❌"}</td>`;
+            }
+            html += "</tr>";
+          });
+
+          html += "</tbody></table>";
+          document.getElementById("token-table").innerHTML = html;
+        }
+      });
+    }
+
+    loadTable();
+    setInterval(loadTable, 60000); // refresh every 60s
   </script>
 </body>
 </html>

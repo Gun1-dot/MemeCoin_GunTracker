@@ -6,6 +6,7 @@
   <title>🔥 Live Memecoin Scanner</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body.dark-mode {
       background-color: #1e1e1e;
@@ -24,6 +25,11 @@
       margin-top: 30px;
       opacity: 0.7;
     }
+    canvas { background: white; border-radius: 8px; margin-top: 20px; }
+    body.dark-mode canvas { background: #2e2e2e; }
+    .risk-low { background-color: #d4edda; }
+    .risk-medium { background-color: #fff3cd; }
+    .risk-high { background-color: #f8d7da; }
   </style>
 </head>
 <body>
@@ -33,11 +39,13 @@
       <button class="btn btn-warning btn-sm" onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
     </div>
 
-    <p>Auto-refreshes every 60 seconds • Showing coins with Score ≥ 2.</p>
+    <p>Auto-refreshes every 60 seconds • Showing top 5 tokens.</p>
 
     <div id="token-table" class="table-responsive mb-4"></div>
 
-    <h5>🟦 Criteria Definitions</h5>
+    <canvas id="scoreChart" height="100"></canvas>
+
+    <h5 class="mt-5">🟦 Criteria Definitions</h5>
     <ul class="criteria-desc">
       <li><strong>Criteria 1 – Volume Spike:</strong> Significant 5-min trading volume increase compared to prior periods (indicates sudden interest).</li>
       <li><strong>Criteria 2 – Liquidity Growth:</strong> Liquidity pool size grew by at least 10% in the past hour (suggests new capital is entering).</li>
@@ -54,43 +62,84 @@
       document.body.classList.toggle("dark-mode");
     }
 
-    function loadTable() {
+    function loadTableAndChart() {
       const csvUrl = "https://raw.githubusercontent.com/Gun1-dot/MemeCoin_GunTracker/main/data/top_5_tokens.csv";
       Papa.parse(csvUrl, {
         download: true,
         header: true,
         complete: function(results) {
-          const data = results.data.filter(row => parseInt(row["Score"]) >= 2);
+          const data = results.data;
           if (data.length === 0) {
-            document.getElementById("token-table").innerHTML = "<p>No tokens meet the criteria currently.</p>";
+            document.getElementById("token-table").innerHTML = "<p>No token data found.</p>";
             return;
           }
 
+          // Table
           let html = '<table class="table table-bordered table-striped table-hover">';
-          html += "<thead><tr>";
-          html += "<th>Name</th><th>Score</th>";
+          html += "<thead><tr><th>Name</th><th>Score</th><th>Price (USD)</th><th>Liquidity (USD)</th>";
           for (let i = 1; i <= 5; i++) html += `<th>Criteria ${i}</th>`;
           html += "</tr></thead><tbody>";
 
+          const chartLabels = [];
+          const chartScores = [];
+
           data.forEach(row => {
-            html += "<tr>";
-            html += `<td>${row["Name"]}</td>`;
-            html += `<td>${row["Score"]}</td>`;
+            const score = parseInt(row["Score"]);
+            let riskClass = "";
+            if (score >= 4) {
+              riskClass = "risk-low";
+            } else if (score === 3) {
+              riskClass = "risk-medium";
+            } else {
+              riskClass = "risk-high";
+            }
+
+            html += `<tr class="${riskClass}">`;
+            html += `<td><a href="https://www.geckoterminal.com/solana/pools/${row["Pool Address"]}" target="_blank">${row["Name"]}</a></td>`;
+            html += `<td>${score}</td>`;
+            html += `<td>${parseFloat(row["Price"]).toFixed(4)}</td>`;
+            html += `<td>${parseFloat(row["Liquidity"]).toLocaleString()}</td>`;
             for (let i = 1; i <= 5; i++) {
-              const val = row[`Criteria ${i}`].toLowerCase();
+              const val = row[`Criteria ${i}`]?.toLowerCase();
               html += `<td>${val === "true" ? "✅" : "❌"}</td>`;
             }
             html += "</tr>";
+
+            chartLabels.push(row["Name"]);
+            chartScores.push(score);
           });
 
           html += "</tbody></table>";
           document.getElementById("token-table").innerHTML = html;
+
+          // Chart
+          const ctx = document.getElementById("scoreChart").getContext("2d");
+          if (window.scoreChart) window.scoreChart.destroy(); // destroy previous chart if any
+          window.scoreChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: chartLabels,
+              datasets: [{
+                label: "Token Score",
+                data: chartScores,
+                backgroundColor: "#ff9900",
+                borderColor: "#cc6600",
+                borderWidth: 1
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: { beginAtZero: true, max: 5 }
+              }
+            }
+          });
         }
       });
     }
 
-    loadTable();
-    setInterval(loadTable, 60000); // refresh every 60s
+    loadTableAndChart();
+    setInterval(loadTableAndChart, 60000); // every 60s
   </script>
 </body>
 </html>

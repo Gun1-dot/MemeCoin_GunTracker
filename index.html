@@ -16,22 +16,53 @@
     <p>Auto-refresh every 60 seconds</p>
 
     <h2>Table 1: Top 5 Tokens Matching All Criteria</h2>
-    <iframe src="data/top_5_tokens.csv" width="100%" height="300"></iframe>
+    <table>
+        <tr><th>Name</th><th>Score</th><th>Criteria 1</th><th>Criteria 2</th><th>Criteria 3</th><th>Criteria 4</th><th>Criteria 5</th></tr>
+        <tr><td>TokenAlpha</td><td>5</td><td>TRUE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td></tr>
+        <tr><td>TokenBravo</td><td>4</td><td>TRUE</td><td>TRUE</td><td>FALSE</td><td>TRUE</td><td>TRUE</td></tr>
+        <tr><td>TokenCharlie</td><td>4</td><td>TRUE</td><td>FALSE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td></tr>
+        <tr><td>TokenDelta</td><td>4</td><td>FALSE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td></tr>
+        <tr><td>TokenEcho</td><td>3</td><td>TRUE</td><td>FALSE</td><td>TRUE</td><td>FALSE</td><td>TRUE</td></tr>
+    </table>
 
     <h2>Table 2: Criteria 1 - Volume Spike</h2>
-    <iframe src="data/criteria_1.csv" width="100%" height="300"></iframe>
+    <table>
+        <tr><th>Name</th><th>Volume Spike (%)</th><th>Passed Criteria</th></tr>
+        <tr><td>TokenAlpha</td><td>410</td><td>TRUE</td></tr>
+        <tr><td>TokenBravo</td><td>320</td><td>TRUE</td></tr>
+        <tr><td>TokenEcho</td><td>305</td><td>TRUE</td></tr>
+    </table>
 
     <h2>Table 3: Criteria 2 - Liquidity Growth</h2>
-    <iframe src="data/criteria_2.csv" width="100%" height="300"></iframe>
+    <table>
+        <tr><th>Name</th><th>Liquidity Growth (%)</th><th>Passed Criteria</th></tr>
+        <tr><td>TokenAlpha</td><td>45</td><td>TRUE</td></tr>
+        <tr><td>TokenBravo</td><td>38</td><td>TRUE</td></tr>
+        <tr><td>TokenDelta</td><td>40</td><td>TRUE</td></tr>
+    </table>
 
     <h2>Table 4: Criteria 3 - Whale Buys</h2>
-    <iframe src="data/criteria_3.csv" width="100%" height="300"></iframe>
+    <table>
+        <tr><th>Name</th><th>Whale Buy Activity</th><th>Passed Criteria</th></tr>
+        <tr><td>TokenAlpha</td><td>TRUE</td><td>TRUE</td></tr>
+        <tr><td>TokenCharlie</td><td>TRUE</td><td>TRUE</td></tr>
+        <tr><td>TokenDelta</td><td>TRUE</td><td>TRUE</td></tr>
+    </table>
 
     <h2>Table 5: Criteria 4 - Price Surge</h2>
-    <iframe src="data/criteria_4.csv" width="100%" height="300"></iframe>
+    <table>
+        <tr><th>Name</th><th>Price Surge (5-min %)</th><th>Passed Criteria</th></tr>
+        <tr><td>TokenAlpha</td><td>22</td><td>TRUE</td></tr>
+        <tr><td>TokenBravo</td><td>15</td><td>TRUE</td></tr>
+        <tr><td>TokenDelta</td><td>12</td><td>TRUE</td></tr>
+    </table>
 
     <h2>Table 6: Criteria 5 - Buyer/Seller Ratio</h2>
-    <iframe src="data/criteria_5.csv" width="100%" height="300"></iframe>
-
+    <table>
+        <tr><th>Name</th><th>Buy/Sell Ratio</th><th>Passed Criteria</th></tr>
+        <tr><td>TokenAlpha</td><td>4.5</td><td>TRUE</td></tr>
+        <tr><td>TokenBravo</td><td>3.6</td><td>TRUE</td></tr>
+        <tr><td>TokenCharlie</td><td>3.1</td><td>TRUE</td></tr>
+    </table>
 </body>
 </html>

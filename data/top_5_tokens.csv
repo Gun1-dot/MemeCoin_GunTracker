@@ -1,0 +1,6 @@
+Name,Score,Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
+TokenAlpha,5,TRUE,TRUE,TRUE,TRUE,TRUE
+TokenBravo,4,TRUE,TRUE,FALSE,TRUE,TRUE
+TokenCharlie,4,TRUE,FALSE,TRUE,TRUE,TRUE
+TokenDelta,4,FALSE,TRUE,TRUE,TRUE,TRUE
+TokenEcho,3,TRUE,FALSE,TRUE,FALSE,TRUE

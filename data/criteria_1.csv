@@ -1,4 +1,6 @@
-Name,Volume Spike (%),Passed Criteria
-TokenAlpha,410,TRUE
-TokenBravo,320,TRUE
-TokenEcho,305,TRUE
+Name,Score,Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
+DOG / SOL,2,True,True,False,True,True
+DeepSeekAI / SOL,1,True,False,False,True,True
+ELONMC / SOL,1,True,False,False,True,True
+MEW / SOL,1,True,False,False,True,True
+$PENGU / SOL,1,True,False,False,True,True

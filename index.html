@@ -23,13 +23,14 @@
       transition: background 0.3s, color 0.3s;
     }
     h1 {
-      font-size: 1.4em;
+      font-size: 1.5em;
       margin-bottom: 0.3em;
     }
     .controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
     table {
       border-collapse: collapse;
@@ -57,10 +58,21 @@
       border: none;
       border-radius: 4px;
       color: #000;
+      margin-top: 10px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9em;
+      opacity: 0.6;
     }
     @media screen and (max-width: 768px) {
       table, thead, tbody, th, td, tr {
         font-size: 0.85em;
+      }
+      .controls {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -78,6 +90,21 @@
     </thead>
     <tbody></tbody>
   </table>
+
+  <section style="margin-top: 20px; font-size: 0.95em;">
+    <h3>📘 Criteria Definitions</h3>
+    <ul>
+      <li><strong>Criteria 1 – Volume Spike:</strong> Significant 5-min trading volume increase compared to prior periods (indicates sudden interest).</li>
+      <li><strong>Criteria 2 – Liquidity Growth:</strong> Liquidity pool size grew by at least 10% in the past hour (suggests new capital is entering).</li>
+      <li><strong>Criteria 3 – Whale Buys:</strong> Presence of large wallet purchases or high concentration of buys (early whale accumulation).</li>
+      <li><strong>Criteria 4 – Price Surge:</strong> Token price increased rapidly within the last 5-minute candle (potential breakout).</li>
+      <li><strong>Criteria 5 – Token Age:</strong> Token was created less than 48 hours ago (maximizing early volatility potential).</li>
+    </ul>
+  </section>
+
+  <footer>
+    © Copyright by Gunawan Panjaitan
+  </footer>
 
   <script>
     const RAW_CSV_URL = "https://raw.githubusercontent.com/Gun1-dot/MemeCoin_GunTracker/main/data/top_5_tokens.csv";

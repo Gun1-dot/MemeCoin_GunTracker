@@ -1,68 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dexscreener Memecoin Scanner</title>
-    <meta http-equiv="refresh" content="60">
-    <style>
-        body { font-family: Arial; margin: 40px; }
-        table { border-collapse: collapse; width: 100%; margin-bottom: 50px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        h2 { margin-top: 60px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Memecoin Scanner</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { font-size: 1.5em; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1em; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+  </style>
 </head>
 <body>
-    <h1>Dexscreener Memecoin Scanner</h1>
-    <p>Auto-refresh every 60 seconds</p>
+  <h1>🔥 Live Memecoin Scanner (Top 5 on Solana)</h1>
+  <p>Auto-refreshes every 60 seconds.</p>
+  <table id="token-table">
+    <thead>
+      <tr><th>Name</th><th>Score</th><th>Criteria 1</th><th>Criteria 2</th><th>Criteria 3</th><th>Criteria 4</th><th>Criteria 5</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-    <h2>Table 1: Top 5 Tokens Matching All Criteria</h2>
-    <table>
-        <tr><th>Name</th><th>Score</th><th>Criteria 1</th><th>Criteria 2</th><th>Criteria 3</th><th>Criteria 4</th><th>Criteria 5</th></tr>
-        <tr><td>TokenAlpha</td><td>5</td><td>TRUE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td></tr>
-        <tr><td>TokenBravo</td><td>4</td><td>TRUE</td><td>TRUE</td><td>FALSE</td><td>TRUE</td><td>TRUE</td></tr>
-        <tr><td>TokenCharlie</td><td>4</td><td>TRUE</td><td>FALSE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td></tr>
-        <tr><td>TokenDelta</td><td>4</td><td>FALSE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td></tr>
-        <tr><td>TokenEcho</td><td>3</td><td>TRUE</td><td>FALSE</td><td>TRUE</td><td>FALSE</td><td>TRUE</td></tr>
-    </table>
+  <script>
+    const RAW_CSV_URL = "https://raw.githubusercontent.com/Gun1-dot/MemeCoin_GunTracker/main/data/top_5_tokens.csv";
 
-    <h2>Table 2: Criteria 1 - Volume Spike</h2>
-    <table>
-        <tr><th>Name</th><th>Volume Spike (%)</th><th>Passed Criteria</th></tr>
-        <tr><td>TokenAlpha</td><td>410</td><td>TRUE</td></tr>
-        <tr><td>TokenBravo</td><td>320</td><td>TRUE</td></tr>
-        <tr><td>TokenEcho</td><td>305</td><td>TRUE</td></tr>
-    </table>
+    function fetchAndRenderCSV() {
+      fetch(RAW_CSV_URL)
+        .then(res => res.text())
+        .then(csv => {
+          const rows = csv.trim().split('\n').map(row => row.split(','));
+          const tableBody = document.querySelector("#token-table tbody");
+          tableBody.innerHTML = "";
 
-    <h2>Table 3: Criteria 2 - Liquidity Growth</h2>
-    <table>
-        <tr><th>Name</th><th>Liquidity Growth (%)</th><th>Passed Criteria</th></tr>
-        <tr><td>TokenAlpha</td><td>45</td><td>TRUE</td></tr>
-        <tr><td>TokenBravo</td><td>38</td><td>TRUE</td></tr>
-        <tr><td>TokenDelta</td><td>40</td><td>TRUE</td></tr>
-    </table>
+          rows.slice(1).forEach(row => {
+            const tr = document.createElement("tr");
+            row.forEach(col => {
+              const td = document.createElement("td");
+              td.textContent = col;
+              tr.appendChild(td);
+            });
+            tableBody.appendChild(tr);
+          });
+        })
+        .catch(err => {
+          console.error("❌ Failed to load CSV:", err);
+        });
+    }
 
-    <h2>Table 4: Criteria 3 - Whale Buys</h2>
-    <table>
-        <tr><th>Name</th><th>Whale Buy Activity</th><th>Passed Criteria</th></tr>
-        <tr><td>TokenAlpha</td><td>TRUE</td><td>TRUE</td></tr>
-        <tr><td>TokenCharlie</td><td>TRUE</td><td>TRUE</td></tr>
-        <tr><td>TokenDelta</td><td>TRUE</td><td>TRUE</td></tr>
-    </table>
-
-    <h2>Table 5: Criteria 4 - Price Surge</h2>
-    <table>
-        <tr><th>Name</th><th>Price Surge (5-min %)</th><th>Passed Criteria</th></tr>
-        <tr><td>TokenAlpha</td><td>22</td><td>TRUE</td></tr>
-        <tr><td>TokenBravo</td><td>15</td><td>TRUE</td></tr>
-        <tr><td>TokenDelta</td><td>12</td><td>TRUE</td></tr>
-    </table>
-
-    <h2>Table 6: Criteria 5 - Buyer/Seller Ratio</h2>
-    <table>
-        <tr><th>Name</th><th>Buy/Sell Ratio</th><th>Passed Criteria</th></tr>
-        <tr><td>TokenAlpha</td><td>4.5</td><td>TRUE</td></tr>
-        <tr><td>TokenBravo</td><td>3.6</td><td>TRUE</td></tr>
-        <tr><td>TokenCharlie</td><td>3.1</td><td>TRUE</td></tr>
-    </table>
+    fetchAndRenderCSV();
+    setInterval(fetchAndRenderCSV, 60000); // refresh every 60 sec
+  </script>
 </body>
 </html>

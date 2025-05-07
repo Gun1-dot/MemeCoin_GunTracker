@@ -1,0 +1,4 @@
+Name,Volume Spike (%),Passed Criteria
+MockTokenA,120,TRUE
+MockTokenB,105,TRUE
+MockTokenD,98,TRUE

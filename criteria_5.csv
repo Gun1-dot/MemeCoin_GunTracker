@@ -1,0 +1,5 @@
+Name,Age (minutes),Passed Criteria
+MockTokenA,350,TRUE
+MockTokenB,420,TRUE
+MockTokenC,470,TRUE
+MockTokenD,200,TRUE

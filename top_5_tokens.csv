@@ -1,0 +1,6 @@
+Name,Score,Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
+MockTokenA,5,True,True,True,True,True
+MockTokenB,4,True,False,True,True,True
+MockTokenC,4,False,True,True,False,True
+MockTokenD,3,True,True,False,True,True
+MockTokenE,3,False,False,False,True,False

@@ -3,94 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔥 Live Memecoin Scanner</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+  <title>Live Memecoin Scanner</title>
   <style>
-    body.dark-mode {
-      background-color: #1e1e1e;
-      color: #f1f1f1;
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --highlight: #ff6600;
     }
-    .table td, .table th {
-      vertical-align: middle;
+    body.dark {
+      --bg: #1e1e1e;
+      --text: #eaeaea;
+      --highlight: #ffcc00;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 0.3em;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1em;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f3f3f3;
+    }
+    body.dark th {
+      background-color: #2a2a2a;
+    }
+    .true { color: green; font-weight: bold; }
+    .false { color: crimson; font-weight: bold; }
+    button {
+      padding: 5px 10px;
+      font-size: 0.9em;
+      cursor: pointer;
+      background: var(--highlight);
+      border: none;
+      border-radius: 4px;
+      color: #000;
+      margin-top: 10px;
+    }
+    footer {
       text-align: center;
+      margin-top: 40px;
+      font-size: 0.9em;
+      opacity: 0.6;
     }
-    .criteria-desc {
-      font-size: 0.95rem;
-    }
-    .copyright {
-      font-size: 0.85rem;
-      text-align: center;
-      margin-top: 30px;
-      opacity: 0.7;
+    @media screen and (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        font-size: 0.85em;
+      }
+      .controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4>🔥 Live Memecoin Scanner (Top 5 on Solana)</h4>
-      <button class="btn btn-warning btn-sm" onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
-    </div>
+  <div class="controls">
+    <h1>🔥 Live Memecoin Scanner (Top 5 on Solana)</h1>
+    <button onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+  </div>
+  <p>Auto-refreshes every 60 seconds • Showing coins with Score ≥ 2</p>
 
-    <p>Auto-refreshes every 60 seconds • Showing coins with Score ≥ 2.</p>
+  <table id="token-table">
+    <thead>
+      <tr><th>Name</th><th>Score</th><th>Criteria 1</th><th>Criteria 2</th><th>Criteria 3</th><th>Criteria 4</th><th>Criteria 5</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-    <div id="token-table" class="table-responsive mb-4"></div>
-
-    <h5>🟦 Criteria Definitions</h5>
-    <ul class="criteria-desc">
+  <section style="margin-top: 20px; font-size: 0.95em;">
+    <h3>📘 Criteria Definitions</h3>
+    <ul>
       <li><strong>Criteria 1 – Volume Spike:</strong> Significant 5-min trading volume increase compared to prior periods (indicates sudden interest).</li>
       <li><strong>Criteria 2 – Liquidity Growth:</strong> Liquidity pool size grew by at least 10% in the past hour (suggests new capital is entering).</li>
       <li><strong>Criteria 3 – Whale Buys:</strong> Presence of large wallet purchases or high concentration of buys (early whale accumulation).</li>
       <li><strong>Criteria 4 – Price Surge:</strong> Token price increased rapidly within the last 5-minute candle (potential breakout).</li>
       <li><strong>Criteria 5 – Token Age:</strong> Token was created less than 48 hours ago (maximizing early volatility potential).</li>
     </ul>
+  </section>
 
-    <div class="copyright">© Copyright by Gunawan Panjaitan</div>
-  </div>
+  <footer>
+    © Copyright by Gunawan Panjaitan
+  </footer>
 
   <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-    }
+    const RAW_CSV_URL = "https://raw.githubusercontent.com/Gun1-dot/MemeCoin_GunTracker/main/data/top_5_tokens.csv";
 
-    function loadTable() {
-      const csvUrl = "https://raw.githubusercontent.com/Gun1-dot/MemeCoin_GunTracker/main/data/top_5_tokens.csv";
-      Papa.parse(csvUrl, {
-        download: true,
-        header: true,
-        complete: function(results) {
-          const data = results.data.filter(row => parseInt(row["Score"]) >= 2);
-          if (data.length === 0) {
-            document.getElementById("token-table").innerHTML = "<p>No tokens meet the criteria currently.</p>";
-            return;
-          }
+    function fetchAndRenderCSV() {
+      fetch(RAW_CSV_URL)
+        .then(res => res.text())
+        .then(csv => {
+          const rows = csv.trim().split('\n').map(row => row.split(','));
+          const tableBody = document.querySelector("#token-table tbody");
+          tableBody.innerHTML = "";
 
-          let html = '<table class="table table-bordered table-striped table-hover">';
-          html += "<thead><tr>";
-          html += "<th>Name</th><th>Score</th>";
-          for (let i = 1; i <= 5; i++) html += `<th>Criteria ${i}</th>`;
-          html += "</tr></thead><tbody>";
+          const headers = rows[0];
+          const filtered = rows.slice(1).filter(r => parseInt(r[1]) >= 2);
 
-          data.forEach(row => {
-            html += "<tr>";
-            html += `<td>${row["Name"]}</td>`;
-            html += `<td>${row["Score"]}</td>`;
-            for (let i = 1; i <= 5; i++) {
-              const val = row[`Criteria ${i}`].toLowerCase();
-              html += `<td>${val === "true" ? "✅" : "❌"}</td>`;
-            }
-            html += "</tr>";
+          filtered.forEach(row => {
+            const tr = document.createElement("tr");
+            row.forEach((col, idx) => {
+              const td = document.createElement("td");
+              if (idx >= 2) {
+                td.innerHTML = col.toLowerCase() === "true" ? "✅" : "❌";
+                td.className = col.toLowerCase();
+              } else {
+                td.textContent = col;
+              }
+              tr.appendChild(td);
+            });
+            tableBody.appendChild(tr);
           });
-
-          html += "</tbody></table>";
-          document.getElementById("token-table").innerHTML = html;
-        }
-      });
+        })
+        .catch(err => {
+          console.error("❌ Failed to load CSV:", err);
+        });
     }
 
-    loadTable();
-    setInterval(loadTable, 60000); // refresh every 60s
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+
+    fetchAndRenderCSV();
+    setInterval(fetchAndRenderCSV, 60000);
   </script>
 </body>
 </html>

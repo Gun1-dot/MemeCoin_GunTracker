@@ -1,6 +1,6 @@
 Name,Score,Price (USD),Liquidity (USD),Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
-ITRUMP / SOL,2,0.0,557595.9735,False,True,True,False,False
-PIPE / SOL,2,0.0,59237.8343,False,True,True,False,False
-SOL / USDC 0.01%,2,0.0,4359167.9728,False,True,True,False,False
-POPCAT / SOL,2,0.0,2215907.9443,False,True,True,False,False
-USDT / SOL,2,0.0,1072804.675,False,True,True,False,False
+ITRUMP / SOL,4,0.0,557595.9735,False,True,True,True,True
+PIPE / SOL,3,0.0,59237.8343,False,True,True,True,False
+267 / SOL,3,0.0,11576.1568,False,True,False,True,True
+fog / SOL,3,0.0,217264.0064,False,True,True,False,True
+DREAM / SOL,3,0.0,89190.9955,False,True,True,False,True

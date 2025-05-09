@@ -1,2 +1,6 @@
-Name,Score,Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
-DOG / SOL,2,True,True,False,True,True
+Name,Score,Criteria 2
+ITRUMP / SOL,1,True
+PIPE / SOL,1,True
+SOL / USDC 0.01%,1,True
+POPE267 / SOL,1,True
+POPCAT / SOL,1,True

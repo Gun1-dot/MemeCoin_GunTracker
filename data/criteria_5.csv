@@ -1,16 +1,15 @@
 Name,Score,Criteria 5
-PIPE / SOL,3,False
-POPE267 / SOL,3,True
-USDT / SOL,3,False
 fog / SOL,3,True
+ITRUMP / SOL,2,False
+PIPE / SOL,2,False
 SOL / USDC 0.01%,2,False
+POPE267 / SOL,2,True
 POPCAT / SOL,2,False
+USDT / SOL,2,False
 SOL / USDT 0.01%,2,False
 ELMO / SOL,2,True
 EZ / SOL,2,False
 MOODENG / SOL,2,False
-DREAM / SOL,2,False
-ITRUMP / SOL,1,False
 267 / SOL,1,False
 bull / SOL,1,True
 ARDOG / SOL,1,True
@@ -18,4 +17,5 @@ TNN / SOL,1,False
 moowaan / SOL,1,True
 Minimus / SOL,1,False
 FEETCOIN / SOL,1,True
+Maodie / SOL,1,True
 RMP / SOL,0,False

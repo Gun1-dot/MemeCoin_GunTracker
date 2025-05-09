@@ -1,21 +1,21 @@
 Name,Score,Price (USD),Liquidity (USD),Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
-fog / SOL,4,0.0,229490.5959,False,True,True,True,True
-DREAM / SOL,4,0.0,92762.1746,False,True,True,True,True
-ITRUMP / SOL,3,0.0,576442.7302,False,True,True,True,False
-PIPE / SOL,3,0.0,59616.6647,False,True,True,True,False
-POPE267 / SOL,3,0.0,151021.6746,False,True,False,True,True
-USDT / SOL,3,0.0,1083579.1312,False,True,True,True,False
-MOODENG / SOL,3,0.0,5102719.2833,False,True,True,True,False
-SOL / USDC 0.01%,2,0.0,4407118.7864,False,True,True,False,False
-POPCAT / SOL,2,0.0,2254114.2029,False,True,True,False,False
-SOL / USDT 0.01%,2,0.0,1156748.7562,False,True,True,False,False
+fog / SOL,4,0.0,230128.253,False,True,True,True,True
+DREAM / SOL,4,0.0,91578.6673,False,True,True,True,True
+ITRUMP / SOL,3,0.0,579692.7359,False,True,True,True,False
+USDT / SOL,3,0.0,1082628.5521,False,True,True,True,False
+MOODENG / SOL,3,0.0,5122331.3133,False,True,True,True,False
+PIPE / SOL,2,0.0,59462.6633,False,True,True,False,False
+SOL / USDC 0.01%,2,0.0,4405142.7341,False,True,True,False,False
+POPE267 / SOL,2,0.0,151214.5268,False,True,False,False,True
+POPCAT / SOL,2,0.0,2256898.6602,False,True,True,False,False
+SOL / USDT 0.01%,2,0.0,1155740.6708,False,True,True,False,False
 ELMO / SOL,2,0.0,30565.9807,False,True,False,False,True
-EZ / SOL,2,0.0,297636.7606,False,True,True,False,False
-TNN / SOL,2,0.0,84052.5147,False,True,False,True,False
-267 / SOL,1,0.0,11929.6546,False,True,False,False,False
+EZ / SOL,2,0.0,297861.3505,False,True,True,False,False
+267 / SOL,1,0.0,12073.1228,False,True,False,False,False
 bull / SOL,1,0.0,2622.9622,False,False,False,False,True
 ARDOG / SOL,1,0.0,1325.5864,False,False,False,False,True
-moowaan / SOL,1,0.0,9317.2446,False,False,False,False,True
-Minimus / SOL,1,0.0,29036.1276,False,True,False,False,False
+TNN / SOL,1,0.0,84078.4583,False,True,False,False,False
+moowaan / SOL,1,0.0,9306.3324,False,False,False,False,True
+Minimus / SOL,1,0.0,29008.0638,False,True,False,False,False
 FEETCOIN / SOL,1,0.0,3713.5564,False,False,False,False,True
 RMP / SOL,0,0.0,11.2763,False,False,False,False,False

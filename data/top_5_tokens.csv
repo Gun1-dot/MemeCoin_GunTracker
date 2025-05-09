@@ -1,21 +1,21 @@
 Name,Score,Price (USD),Liquidity (USD),Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
-DREAM / SOL,4,0.0,91536.9492,False,True,True,True,True
-ITRUMP / SOL,3,0.0,580420.1792,False,True,True,True,False
-PIPE / SOL,3,0.0,59606.2623,False,True,True,True,False
-POPCAT / SOL,3,0.0,2261140.9688,False,True,True,True,False
-USDT / SOL,3,0.0,1079949.4791,False,True,True,True,False
-fog / SOL,3,0.0,224276.026,False,True,True,False,True
-EZ / SOL,3,0.0,300702.1093,False,True,True,True,False
-MOODENG / SOL,3,0.0,5131878.0198,False,True,True,True,False
-SOL / USDC 0.01%,2,0.0,4405481.6557,False,True,True,False,False
-POPE267 / SOL,2,0.0,150735.6016,False,True,False,False,True
-SOL / USDT 0.01%,2,0.0,1153772.8635,False,True,True,False,False
+DREAM / SOL,4,0.0,93005.535,False,True,True,True,True
+ITRUMP / SOL,3,0.0,581497.5038,False,True,True,True,False
+fog / SOL,3,0.0,218779.4933,False,True,True,False,True
+PIPE / SOL,2,0.0,59601.6146,False,True,True,False,False
+SOL / USDC 0.01%,2,0.0,4406752.2046,False,True,True,False,False
+POPE267 / SOL,2,0.0,150725.9916,False,True,False,False,True
+POPCAT / SOL,2,0.0,2263938.5957,False,True,True,False,False
+USDT / SOL,2,0.0,1080562.0259,False,True,True,False,False
+SOL / USDT 0.01%,2,0.0,1154468.8861,False,True,True,False,False
 ELMO / SOL,2,0.0,30565.9807,False,True,False,False,True
+EZ / SOL,2,0.0,302326.9329,False,True,False,True,False
+MOODENG / SOL,2,0.0,5105027.5333,False,True,True,False,False
 267 / SOL,1,0.0,12050.9682,False,True,False,False,False
 bull / SOL,1,0.0,2622.9622,False,False,False,False,True
 ARDOG / SOL,1,0.0,1325.5864,False,False,False,False,True
-TNN / SOL,1,0.0,84078.4583,False,True,False,False,False
+TNN / SOL,1,0.0,83945.0341,False,True,False,False,False
 moowaan / SOL,1,0.0,9306.3324,False,False,False,False,True
-Minimus / SOL,1,0.0,29008.0638,False,True,False,False,False
+Minimus / SOL,1,0.0,28998.1381,False,True,False,False,False
 FEETCOIN / SOL,1,0.0,3713.5564,False,False,False,False,True
 RMP / SOL,0,0.0,11.2763,False,False,False,False,False

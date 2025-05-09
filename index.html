@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔥 Live Memecoin Tracker</title>
+  <title>🔥 Live Memecoin Scanner (Top 20 on Solana)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -64,20 +64,20 @@
   </style>
 </head>
 <body>
-  <button class="toggle-btn" onclick="toggleDark()">🌓 Dark Mode</button>
-  <h1>🔥 Live Memecoin Tracker</h1>
-  <p>Auto-updated every 60 seconds • Based on GeckoTerminal + Telegram Alerts</p>
+  <button class="toggle-btn" onclick="toggleDark()">🌓 Toggle Dark Mode</button>
+  <h1>🔥 Live Memecoin Scanner (Top 20 on Solana)</h1>
+  <p>Auto-refreshes every 60 seconds • Showing top 20 tokens.</p>
 
   <table id="data-table">
     <thead>
       <tr>
-        <th>Token</th>
+        <th>Name</th>
         <th>Score</th>
         <th>Price (USD)</th>
-        <th>Liquidity</th>
-        <th>Criteria 1<br>(Volume)</th>
-        <th>Criteria 2<br>(Liquidity)</th>
-        <th>Criteria 3<br>(Buys)</th>
+        <th>Liquidity (USD)</th>
+        <th>Criteria 1<br>(Volume Spike)</th>
+        <th>Criteria 2<br>(Liquidity Growth)</th>
+        <th>Criteria 3<br>(Whale Buys)</th>
         <th>Criteria 4<br>(Price Surge)</th>
         <th>Criteria 5<br>(Age &lt; 24h)</th>
       </tr>
@@ -85,7 +85,7 @@
     <tbody></tbody>
   </table>
 
-  <div class="footer">© Gunawan Panjaitan • GitHub Pages & Telegram Enabled</div>
+  <div class="footer">© Gunawan Panjaitan • Powered by GitHub Pages</div>
 
   <script>
     function toggleDark() {
@@ -106,7 +106,10 @@
         const score = parseInt(row[1]);
         if (score >= 4) tr.classList.add("high-score");
 
-        row.forEach((cell, i) => {
+        // Remove Criteria 6 (last column)
+        const filtered = [...row.slice(0, 9)]; // Keep only first 9 columns
+
+        filtered.forEach((cell, i) => {
           const td = document.createElement("td");
           if (i >= 4 && i <= 8) {
             td.innerHTML = cell === "True" ? "✔" : "✘";

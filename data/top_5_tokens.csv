@@ -1,21 +1,21 @@
 Name,Score,Price (USD),Liquidity (USD),Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
-PIPE / SOL,3,0.0,59828.2536,False,True,True,True,False
-POPE267 / SOL,3,0.0,151660.0335,False,True,True,False,True
-fog / SOL,3,0.0,215974.0391,False,True,True,False,True
-SOL / USDC 0.01%,2,0.0,4393141.1202,False,True,True,False,False
-POPCAT / SOL,2,0.0,2285190.4576,False,True,True,False,False
-USDT / SOL,2,0.0,1088192.3081,False,True,True,False,False
-SOL / USDT 0.01%,2,0.0,1158736.9979,False,True,True,False,False
+PIPE / SOL,3,0.0,59884.0529,False,True,True,True,False
+POPE267 / SOL,3,0.0,151162.8246,False,True,False,True,True
+USDT / SOL,3,0.0,1086206.1311,False,True,True,True,False
+fog / SOL,3,0.0,212659.7125,False,True,True,False,True
+MOODENG / SOL,3,0.0,5084026.0843,False,True,True,True,False
+SOL / USDC 0.01%,2,0.0,4387113.7822,False,True,True,False,False
+POPCAT / SOL,2,0.0,2280477.0265,False,True,True,False,False
+SOL / USDT 0.01%,2,0.0,1155995.2971,False,True,True,False,False
 ELMO / SOL,2,0.0,30629.058,False,True,False,False,True
-DREAM / SOL,2,0.0,85488.6789,False,True,True,False,False
-EZ / SOL,2,0.0,298533.3365,False,True,True,False,False
-MOODENG / SOL,2,0.0,5072371.7966,False,True,True,False,False
+EZ / SOL,2,0.0,287309.3405,False,True,True,False,False
 TNN / SOL,2,0.0,84013.1837,False,True,False,True,False
+DREAM / SOL,2,0.0,85062.6519,False,True,True,False,False
 267 / SOL,1,0.0,12096.5929,False,True,False,False,False
 bull / SOL,1,0.0,2629.7219,False,False,False,False,True
 ARDOG / SOL,1,0.0,1328.9962,False,False,False,False,True
 moowaan / SOL,1,0.0,9145.5207,False,False,False,False,True
 Minimus / SOL,1,0.0,28818.3403,False,True,False,False,False
 FEETCOIN / SOL,1,0.0,3722.8807,False,False,False,False,True
-ITRUMP / SOL,0,0.0,3327.9544,False,False,False,False,False
+ITRUMP / SOL,0,0.0,3078.9936,False,False,False,False,False
 RMP / SOL,0,0.0,11.3062,False,False,False,False,False

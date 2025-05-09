@@ -1,6 +1,6 @@
-Name,Score,Criteria 1,Criteria 2,Criteria 3,Criteria 4,Criteria 5
-DOG / SOL,2,True,True,False,True,True
-DeepSeekAI / SOL,1,True,False,False,True,True
-ELONMC / SOL,1,True,False,False,True,True
-MEW / SOL,1,True,False,False,True,True
-$PENGU / SOL,1,True,False,False,True,True
+Name,Score,Criteria 1
+ITRUMP / SOL,1,False
+PIPE / SOL,1,False
+SOL / USDC 0.01%,1,False
+POPE267 / SOL,1,False
+POPCAT / SOL,1,False
